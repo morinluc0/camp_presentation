@@ -1,0 +1,7 @@
+name: 'Drupal Camp Presentation'
+type: module
+description: 'Drupal Camp GraphQL Presentation'
+core: 8.x
+package: 'coldfront'
+dependencies:
+  - graphql

@@ -1,0 +1,14 @@
+{
+  "name": "drupal/camp_presentation",
+  "type": "drupal-module",
+  "description": "Drupal Camp GraphQL Presentation",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/camp_presentation",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/camp_presentation",
+    "source": "http://cgit.drupalcode.org/camp_presentation"
+  },
+  "require": { }
+}

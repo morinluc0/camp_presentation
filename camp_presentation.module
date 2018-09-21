@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Contains camp_presentation.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function camp_presentation_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the camp_presentation module.
+    case 'help.page.camp_presentation':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Drupal Camp GraphQL Presentation') . '</p>';
+      return $output;
+
+    default:
+  }
+}
