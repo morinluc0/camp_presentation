@@ -1,7 +1,6 @@
-name: 'Drupal Camp Presentation'
 type: module
-description: 'Drupal Camp GraphQL Presentation'
+name: Drupal Camp presentation
+description: Drupal camp presentation
 core: 8.x
-package: 'coldfront'
 dependencies:
-  - graphql
+- graphql

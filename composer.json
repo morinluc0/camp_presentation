@@ -10,5 +10,7 @@
     "issues": "https://www.drupal.org/project/issues/camp_presentation",
     "source": "http://cgit.drupalcode.org/camp_presentation"
   },
-  "require": { }
+  "require": { 
+    "drupal/graphql": "^3.0@RC",
+  }
 }

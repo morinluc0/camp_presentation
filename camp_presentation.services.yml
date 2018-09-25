@@ -1,0 +1,3 @@
+services:
+  camp_presentation.placeholder:
+    class: Drupal\camp_presentation\Placeholder
