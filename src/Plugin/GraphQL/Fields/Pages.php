@@ -10,20 +10,20 @@ use GraphQL\Type\Definition\ResolveInfo;
  * Body of the content.
  *
  * @GraphQLField(
- *   id = "comment_name",
+ *   id = "wikipedia_page",
  *   secure = true,
- *   name = "commentName",
+ *   name = "pageContent",
  *   type = "String",
- *   parents = {"JsonComment"}
+ *   parents = {"WikipediaPage"}
  * )
  */
-class Name extends FieldPluginBase {
+class Pages extends FieldPluginBase {
 
   /**
    * {@inheritdoc}
    */
   public function resolveValues($value, array $args, ResolveContext $context, ResolveInfo $info) {
-    yield $value['name'];
+    yield $value['extract'];
   }
 
 }

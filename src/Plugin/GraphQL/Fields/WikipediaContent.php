@@ -6,38 +6,38 @@ use Drupal\Core\DependencyInjection\DependencySerializationTrait;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\graphql\GraphQL\Execution\ResolveContext;
 use Drupal\graphql\Plugin\GraphQL\Fields\FieldPluginBase;
-use Drupal\camp_presentation\PlaceholderInterface;
+use Drupal\camp_presentation\WikipediaInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use GraphQL\Type\Definition\ResolveInfo;
-use Drupal\node\Entity\Node;
+use Drupal\taxonomy\Entity\Term;
 
 /**
  * List everything we've got in our garage.
  *
  * @GraphQLField(
- *   id = "placeholder_comment",
+ *   id = "wikipedia_content",
  *   secure = true,
- *   name = "placeholderComment",
- *   type = "[JsonData]",
+ *   name = "wikipediaContent",
+ *   type = "[WikipediaData]",
  *   nullable = true,
- *   parents = {"NodeArticle"}
+ *   parents = {"TaxonomyTerm"}
  * )
  */
-class PlaceholderComment extends FieldPluginBase implements ContainerFactoryPluginInterface {
+class WikipediaContent extends FieldPluginBase implements ContainerFactoryPluginInterface {
   use DependencySerializationTrait;
 
   /**
    * The placeholder instance.
    *
-   * @var \Drupal\camp_presentation\PlaceholderInterface
+   * @var \Drupal\camp_presentation\WikipediaInterface
    */
-  protected $placeholder;
+  protected $wikipedia;
 
   /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $pluginId, $pluginDefinition) {
-    return new static($configuration, $pluginId, $pluginDefinition, $container->get('camp_presentation.placeholder'));
+    return new static($configuration, $pluginId, $pluginDefinition, $container->get('camp_presentation.wikipedia'));
   }
 
   /**
@@ -49,11 +49,11 @@ class PlaceholderComment extends FieldPluginBase implements ContainerFactoryPlug
    *   The plugin id.
    * @param mixed $pluginDefinition
    *   The plugin definition array.
-   * @param \Drupal\camp_presentation\PlaceholderInterface $placeholder
+   * @param \Drupal\camp_presentation\wikipediaInterface $wikipedia
    *   The placeholder service.
    */
-  public function __construct(array $configuration, $pluginId, $pluginDefinition, PlaceholderInterface $placeholder) {
-    $this->placeholder = $placeholder;
+  public function __construct(array $configuration, $pluginId, $pluginDefinition, WikipediaInterface $wikipedia) {
+    $this->wikipedia = $wikipedia;
     parent::__construct($configuration, $pluginId, $pluginDefinition);
   }
 
@@ -61,8 +61,8 @@ class PlaceholderComment extends FieldPluginBase implements ContainerFactoryPlug
    * {@inheritdoc}
    */
   public function resolveValues($value, array $args, ResolveContext $context, ResolveInfo $info) {
-    if ($value instanceof Node) {
-      foreach ($this->placeholder->getComments($value->id()) as $comment) {
+    if ($value instanceof Term) {
+      foreach ($this->wikipedia->getWikipediaContent($value->getName()) as $comment) {
         yield $comment;
       }
     }

@@ -1,3 +1,6 @@
 services:
   camp_presentation.placeholder:
     class: Drupal\camp_presentation\Placeholder
+  camp_presentation.wikipedia:
+    class: Drupal\camp_presentation\Wikipedia
+

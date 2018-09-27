@@ -14,7 +14,7 @@ use GraphQL\Type\Definition\ResolveInfo;
  *   secure = true,
  *   name = "id",
  *   type = "Int",
- *   parents = {"JsonData"}
+ *   parents = {"JsonData", "WikipediaPage"}
  * )
  */
 class Id extends FieldPluginBase {

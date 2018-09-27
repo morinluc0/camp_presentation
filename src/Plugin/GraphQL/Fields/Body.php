@@ -14,7 +14,7 @@ use GraphQL\Type\Definition\ResolveInfo;
  *   secure = true,
  *   name = "commentBody",
  *   type = "String",
- *   parents = {"JsonData"}
+ *   parents = {"JsonComment"}
  * )
  */
 class Body extends FieldPluginBase {
