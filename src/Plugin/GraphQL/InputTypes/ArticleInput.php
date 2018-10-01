@@ -15,7 +15,8 @@ use Drupal\graphql\Plugin\GraphQL\InputTypes\InputTypePluginBase;
  *     "body" = {
  *        "type" = "String",
  *        "nullable" = "TRUE"
- *     }
+ *     },
+       "fieldTags" = "String"
  *   }
  * )
  */

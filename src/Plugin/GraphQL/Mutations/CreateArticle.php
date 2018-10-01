@@ -6,6 +6,7 @@ use Drupal\graphql\GraphQL\Type\InputObjectType;
 use Drupal\graphql_core\Plugin\GraphQL\Mutations\Entity\CreateEntityBase;
 use Drupal\graphql\GraphQL\Execution\ResolveContext;
 use GraphQL\Type\Definition\ResolveInfo;
+use \Drupal\taxonomy\Entity\Term;
 
 /**
  * Simple mutation for updating an existing article node.
@@ -28,9 +29,30 @@ class CreateArticle extends CreateEntityBase {
    * {@inheritdoc}
    */
   protected function extractEntityInput($value, array $args, ResolveContext $context, ResolveInfo $info) {
+    // Split the fieldtags and check if they exist. 
+    $field_tags = [];
+    if (isset($args['input']['fieldTags']) && !empty($args['input']['fieldTags'])) {
+      $exploded = explode(',', $args['input']['fieldTags']);
+      foreach ($exploded as $term) {
+        $loaded = \Drupal::entityManager()->getStorage('taxonomy_term')->loadByProperties(['name' => $term]);
+        if (!empty($loaded)) {
+          $field_tags[] = reset($loaded);
+        }
+        else {
+          $new_term = Term::create([
+            'name' => $term, 
+            'vid' => 'tags',
+          ]);
+          $new_term->save();
+	  $field_tags[] = $new_term->id();
+        }
+      }
+    }
+ 
     return array_filter([
       'title' => $args['input']['title'],
       'body' => $args['input']['body'],
+      'field_tags' => $field_tags,
     ]);
   }
 
