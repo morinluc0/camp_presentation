@@ -3,7 +3,7 @@
 namespace Drupal\camp_presentation\Plugin\GraphQL\Mutations;
 
 use Drupal\graphql\GraphQL\Type\InputObjectType;
-use Drupal\graphql_core\Plugin\GraphQL\Mutations\Entity\UpdateEntityBase;
+use Drupal\graphql_core\Plugin\GraphQL\Mutations\Entity\CreateEntityBase;
 use Drupal\graphql\GraphQL\Execution\ResolveContext;
 use GraphQL\Type\Definition\ResolveInfo;
 
@@ -11,19 +11,18 @@ use GraphQL\Type\Definition\ResolveInfo;
  * Simple mutation for updating an existing article node.
  *
  * @GraphQLMutation(
- *   id = "update_article",
+ *   id = "create_article",
  *   entity_type = "node",
  *   entity_bundle = "article",
  *   secure = true,
- *   name = "updateArticle",
+ *   name = "createArticle",
  *   type = "EntityCrudOutput",
  *   arguments = {
- *      "id" = "String",
  *      "input" = "ArticleInput"
  *   }
  * )
  */
-class UpdateArticle extends UpdateEntityBase {
+class CreateArticle extends CreateEntityBase {
 
   /**
    * {@inheritdoc}
@@ -36,5 +35,3 @@ class UpdateArticle extends UpdateEntityBase {
   }
 
 }
-
-
