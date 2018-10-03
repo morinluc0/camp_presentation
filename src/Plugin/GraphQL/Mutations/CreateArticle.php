@@ -53,7 +53,7 @@ class CreateArticle extends CreateEntityBase {
  
     return array_filter([
       'title' => $args['title'],
-      'body' => $args['body'],
+      'body' => $args['description'],
       'field_tags' => $field_tags,
     ]);
   }
