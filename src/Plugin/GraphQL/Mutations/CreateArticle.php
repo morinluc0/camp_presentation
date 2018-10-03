@@ -19,7 +19,9 @@ use \Drupal\taxonomy\Entity\Term;
  *   name = "createArticle",
  *   type = "EntityCrudOutput",
  *   arguments = {
- *      "input" = "ArticleInput"
+ *      "title" = "String",
+ *      "description" = "String",
+ *      "fieldTags" = "String"
  *   }
  * )
  */
@@ -31,8 +33,8 @@ class CreateArticle extends CreateEntityBase {
   protected function extractEntityInput($value, array $args, ResolveContext $context, ResolveInfo $info) {
     // Split the fieldtags and check if they exist. 
     $field_tags = [];
-    if (isset($args['input']['fieldTags']) && !empty($args['input']['fieldTags'])) {
-      $exploded = explode(',', $args['input']['fieldTags']);
+    if (isset($args['fieldTags']) && !empty($args['fieldTags'])) {
+      $exploded = explode(',', $args['fieldTags']);
       foreach ($exploded as $term) {
         $loaded = \Drupal::entityManager()->getStorage('taxonomy_term')->loadByProperties(['name' => $term]);
         if (!empty($loaded)) {
@@ -50,8 +52,8 @@ class CreateArticle extends CreateEntityBase {
     }
  
     return array_filter([
-      'title' => $args['input']['title'],
-      'body' => $args['input']['body'],
+      'title' => $args['title'],
+      'body' => $args['body'],
       'field_tags' => $field_tags,
     ]);
   }
